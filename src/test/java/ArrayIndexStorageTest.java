@@ -41,4 +41,18 @@ public class ArrayIndexStorageTest {
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void checkIndexOutOfBoundsException() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            int arr[] = {10, 2, 7, 3};
+            int negativeIndex = arr.length+1;
+            ArrayIndexStorage arrayIndexStorage = new ArrayIndexStorage(arr);
+            arrayIndexStorage.get(negativeIndex);
+        });
+
+        String expectedMessage = "Индекс не может быть отрицательным числом или больше размера массива";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }

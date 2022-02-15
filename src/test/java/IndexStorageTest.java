@@ -38,4 +38,33 @@ public class IndexStorageTest {
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    public void checkGetNegativeIndexException() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            int size = 5;
+            int index = -1;
+            IndexStorage indexStorage = new IndexStorage(size);
+            indexStorage.get(index);
+        });
+
+        String expectedMessage = "Индекс не может быть отрицательным числом или больше размера массива";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void checkGetOutOfBoundsIndexException() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            int size = 5;
+            int index = size + 1;
+            IndexStorage indexStorage = new IndexStorage(size);
+            indexStorage.get(index);
+        });
+
+        String expectedMessage = "Индекс не может быть отрицательным числом или больше размера массива";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
 }
